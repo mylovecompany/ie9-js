@@ -14,10 +14,12 @@
   Doug Wright, Richard York, Kenneth Kolano, MegaZone,
   Thomas Verelst, Mark 'Tarquin' Wilton-Jones, Rainer Åhlfors,
   David Zulaica, Ken Kolano, Kevin Newman, Sjoerd Visscher,
-  Ingo Chao
+  Ingo Chao,
+  Mikhail Emelchenkov @ MyLove Company, LLC,
+  Dmitry Ilin @ MyLove Company, LLC
 */
 
-// timestamp: Fri, 30 Apr 2010 20:59:18
+// timestamp: Mon, 5 Nov 2012 19:21:00
 
 (function(window, document) {
 
@@ -2857,11 +2859,21 @@ function throwSelectorError() {
 // -----------------------------------------------------------------------
 
 IE7.loaded = true;
+IE7.styleLoaded = false;
 
 (function() {
   try {
     // http://javascript.nwbox.com/IEContentLoaded/
-    if (!document.body) throw "continue";
+	if (!IE7.styleLoaded) {
+        // Hide <body> before applying IE fixes to avoid rendering issues
+		var headID = document.getElementsByTagName("head")[0];
+		var cssNode = document.createElement('style');
+		cssNode.type = 'text/css';
+		cssNode.styleSheet.cssText = 'body{display:none;}';
+		headID.appendChild(cssNode);
+		IE7.styleLoaded = true;
+	}
+	if (!document.body) throw "continue";
     documentElement.doScroll("left");
   } catch (ex) {
     setTimeout(arguments.callee, 1);
@@ -2896,6 +2908,9 @@ IE7.loaded = true;
   IE7.CSS.apply();
 
   IE7.recalc();
+
+  // Display <body> again after applying IE fixes
+  document.body.style.display = 'block';
 })();
 
 })(this, document);

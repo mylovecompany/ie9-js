@@ -8,18 +8,17 @@
 
 /* credits/thanks:
   Shaggy, Martijn Wargers, Jimmy Cerra, Mark D Anderson,
-  Lars Dieckow, Erik Arvidsson, Gellért Gyuris, James Denny,
+  Lars Dieckow, Erik Arvidsson, GellÃ©rt Gyuris, James Denny,
   Unknown W Brackets, Benjamin Westfarer, Rob Eberhardt,
   Bill Edney, Kevin Newman, James Crompton, Matthew Mastracci,
   Doug Wright, Richard York, Kenneth Kolano, MegaZone,
-  Thomas Verelst, Mark 'Tarquin' Wilton-Jones, Rainer Åhlfors,
+  Thomas Verelst, Mark 'Tarquin' Wilton-Jones, Rainer Ã…hlfors,
   David Zulaica, Ken Kolano, Kevin Newman, Sjoerd Visscher,
   Ingo Chao,
   Mikhail Emelchenkov @ MyLove Company, LLC,
-  Dmitry Ilin @ MyLove Company, LLC
+  Dmitry Ilin @ MyLove Company, LLC,
+  Evan Jacobs
 */
-
-// timestamp: Mon, 5 Nov 2012 19:21:00
 
 (function(window, document) {
 
@@ -28,7 +27,9 @@ var IE7 = window.IE7 = {
   toString: K("[IE7]")
 };
 IE7.compat = 9;
-var appVersion = IE7.appVersion = navigator.appVersion.match(/MSIE (\d\.\d)/)[1] - 0;
+
+var appV = navigator.appVersion.match(/MSIE (\d\.\d)/);
+var appVersion = IE7.appVersion = (appV != null) ? appV[1] - 0 : 0;
 
 if (/ie7_off/.test(top.location.search) || appVersion < 5.5 || appVersion >= IE7.compat) return;
 
